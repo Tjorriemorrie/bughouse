@@ -1,0 +1,17 @@
+#db:
+#  image: postgres
+#  environment:
+#    - POSTGRES_PASSWORD=spe1er
+#    - POSTGRES_USER=speler
+#    - POSTGRES_DB=musiek
+#  ports:
+#    - "4321:5432"
+web:
+  build: .
+  volumes:
+    - .:/code
+#  links:
+#    - db
+  ports:
+    - "8888:8888"
+  command: python run.py
