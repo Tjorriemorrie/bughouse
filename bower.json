@@ -1,0 +1,24 @@
+{
+  "name": "bughouse",
+  "description": "chess",
+  "main": "index.js",
+  "authors": [
+    "tjorriemorrie <jacoj82@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Tjorriemorrie/bughouse",
+  "moduleType": [
+    "es6"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chess.js": "~0.9.3"
+  }
+}

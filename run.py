@@ -1,6 +1,7 @@
-import tornado.ioloop
 from app import app
+from tornado.ioloop import IOLoop
+from tornado.options import options, parse_command_line
 
-# run app
-app.listen(8888)
-tornado.ioloop.IOLoop.current().start()
+parse_command_line()
+app.listen(options.port)
+IOLoop.current().start()
