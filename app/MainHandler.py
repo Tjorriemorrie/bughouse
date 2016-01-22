@@ -27,6 +27,10 @@ class WSHandler(WebSocketHandler):
 		self.stream.set_nodelay(True)
 		clients[self.id] = {"id": self.id, "object": self}
 
+		# is there bots as white?
+		# make bot white move
+		# with response do a write to client
+
 	def on_message(self, message):
 		"""
 		when we receive some message we want some message handler..
@@ -35,12 +39,13 @@ class WSHandler(WebSocketHandler):
 		print "Client %s received a message : %s" % (self.id, message)
 		# self.write_message('Server received: {}'.format(message))
 
+		board = Board(fen=message)
 		engine = uci.popen_engine("/Users/jaco/code/bughouse/stockfish-7-mac/Mac/stockfish-7-64")
 		engine.uci()
 		engine.setoption({'Ponder': False})
-		engine.position(Board(fen=message))
+		engine.position(board)
 		best_move = engine.go(wtime=60000, btime=60000)
-		print best_move
+		engine.quit()
 
 		# print engine.options
 		# options = OptionMap(
@@ -72,6 +77,7 @@ class WSHandler(WebSocketHandler):
 		# 	})
 
 		msg = {
+			'board': 'main',
 			'from': str(best_move.bestmove)[:2],
 			'to': str(best_move.bestmove)[-2:]
 		}
